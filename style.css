@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #666;
+}
+
+header {
+  margin: 30px;
+  text-align: center;
+  font-family: "calibri";
+}
+
+.form-calc {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  border-radius: 30px;
+  font-family: "calibri";
+  color: #fff;
+  box-shadow: 2px 5px 20px #000;
+}
+
+.form-calc h4 {
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.input-ingreso {
+  width: 100%;
+  padding: 10px;
+  background: #24303c;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-family: "calibri";
+  font-size: "18px";
+  color: #fff;
+}
+
+.select-form {
+  width: 100%;
+  padding: 10px;
+  background: #24303c;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-family: "calibri";
+  font-size: "16px";
+  color: #fff;
+}
+
+.btn {
+  width: 100%;
+  background: #1f53c5;
+  border: none;
+  padding: 12px;
+  color: white;
+  margin: 16px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
