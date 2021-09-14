@@ -16,58 +16,70 @@ let recargo = document.getElementById("recargo");
 let premio = 0;
 var derechoEmision = 1;
 let primarec = 0;
+let iva = document.getElementById("iva");
+let condicion = 0;
+let primaConRecargo = 0;
+let premioSinIva = 0;
+let premioConIva = 0;
+let imp = 0;
+let premioFinal = 0;
 
 function calculo() {
   let categoriaValue = categoria.value;
-
   switch (categoriaValue) {
     case "1":
       tasa = 0.43185; //valor de tasa por muerte
       tasaAsist = 6.88; //valor de tasa por asistencia medica
       break;
-
     case "2":
       tasa = 0.48;
       tasaAsist = 7.84;
-
       break;
-
     case "3":
       tasa = 0.5182;
       tasaAsist = 8.1826;
-
       break;
-
     case "4":
       tasa = 0.643;
       tasaAsist = 8.2636;
-
       break;
-
     case "5":
       tasa = 0.6942;
       tasaAsist = 8.4636;
-
       break;
-
     case "6":
       tasa = 0.952;
       tasaAsist = 16.16;
-
       break;
-
     case "7":
       tasa = 1.08185;
       tasaAsist = 18.3636;
-
       break;
-
     case "8":
       tasa = 2.18185;
       tasaAsist = 41.2727;
-
       break;
+    default:
+      alert("error, volver a intentar");
+  }
 
+  let ivaValue = iva.value;
+  switch (ivaValue) {
+    case "noCategorizado":
+      condicion = 33.71;
+      break;
+    case "responsableInscripto":
+      condicion = 21;
+      break;
+    case "monotributista":
+      condicion = 21;
+      break;
+    case "exento":
+      condicion = 21;
+      break;
+    case "consumidorFInal":
+      condicion = 21;
+      break;
     default:
       alert("error, volver a intentar");
   }
@@ -109,41 +121,53 @@ function calculo() {
         365) * //calculo de prima de asistencia medica para periodo menor  244 días
       cantidadDias.value;
     // if (sumaAseguradaAsistencia.value > 0) {
-    //   primaAsistotal = primaAsist + (primaAsist * 50) / 100; //calculo de prima con asistencia + 50% recargo
+    primaAsistotal = primaAsist + (primaAsist * 50) / 100; //calculo de prima con asistencia + 50% recargo
     //   alert(primaAsistotal + primarec); //alerta de prima total CON asistencia medica en PERIODO CORTO
     // primaTotal = primaAsistotal + primarec;
-    primaTotal = primaAsist + primarec;
+    primaTotal = primaAsistotal + primarec;
     alert(primaTotal);
   } //else {
   //alert(primarec); //alerta de prima total SIN asistencia medica
   // }
-  //   } else {
-  //     //prima para periodo largo
-  //     primaAsist = tasaAsist * ((sumaAseguradaAsistencia / 1000) * cantidadPersonas.value); //prima para asistencia medica
-  //     if (sumaAseguradaAsistencia.value > 0) {
-  //       //alert(prima365 + primaAsist); //prima Anual + asistencia medica
-  //       primaTotal = prima365 + primaAsist;
-  //     }
-  //   }
+  // }
+  else {
+    //prima para periodo largo
+    primaAsist =
+      tasaAsist *
+      ((sumaAseguradaAsistencia.value / 1000) * cantidadPersonas.value); //prima para asistencia medica
+    //if (sumaAseguradaAsistencia.value > 0) {
+    //alert(prima365 + primaAsist); //prima Anual + asistencia medica
+    primaTotal = prima365 + primaAsist;
+    alert(primaTotal);
+    //}
+  }
 
-  //   //   //***********************PRIMA MINIMA***************************************//
+  //***********************PRIMA MINIMA***************************************//
 
-  //   if (primaTotal < 300) {
-  //     primaTotal = 300;
-  //   }
+  if (primaTotal < 300) {
+    primaTotal = 300;
+    alert(" se aplica prima mínima: $" + primaTotal);
+  }
 
-  //   //***********************derechos de emision********************************/
-  //   if (primaTotal <= 120) {
-  //     derechoEmision = 30;
-  //   } else if (primaTotal <= 250 && primaTotal > 120) {
-  //     derechoEmision = 40;
-  //   } else if (primaTotal <= 500 && primaTotal > 250) {
-  //     derechoEmision = 50;
-  //   } else if (primaTotal <= 1000 && primaTotal > 500) {
-  //     derechoEmision = 60;
-  //   } else if (primaTotal > 1000) {
-  //     derechoEmision = 80;
-  //   }
+  //***********************derechos de emision********************************/
+  if (primaTotal <= 120) {
+    derechoEmision = 30;
+  } else if (primaTotal <= 250 && primaTotal > 120) {
+    derechoEmision = 40;
+  } else if (primaTotal <= 500 && primaTotal > 250) {
+    derechoEmision = 50;
+  } else if (primaTotal <= 1000 && primaTotal > 500) {
+    derechoEmision = 60;
+  } else if (primaTotal > 1000) {
+    derechoEmision = 80;
+  }
 
-  //   alert(primaTotal);
+  //******CALCULO DEL PREMIO!!!!!*******/
+  recargo = recargo.value;
+  primaConRecargo = (recargo * primaTotal) / 100;
+  premioSinIva = primaTotal + primaConRecargo + derechoEmision;
+  premioConIva = (condicion * premioSinIva) / 100;
+  imp = (1.1 * premioSinIva) / 100;
+  premioFinal = premioSinIva + premioConIva + imp;
+  alert("el premio es: " + premioFinal);
 }
