@@ -3,8 +3,8 @@ let categoria = document.getElementById("categoria");
 let tasa = 0;
 let tasaAsist = 0;
 calcular.addEventListener("click", calculo);
-var sumaAsegurada = document.getElementById("sumaAsegurada");
-var sumaAseguradaAsistencia = document.getElementById(
+let sumaAsegurada = document.getElementById("sumaAsegurada");
+let sumaAseguradaAsistencia = document.getElementById(
   "sumaAseguradaAsistencia"
 );
 let cantidadPersonas = document.getElementById("cantidadPersonas");
@@ -14,7 +14,7 @@ let primaAsist = 0;
 let primaTotal = 0;
 let recargo = document.getElementById("recargo");
 let premio = 0;
-var derechoEmision = 1;
+let derechoEmision = 1;
 let primarec = 0;
 let iva = document.getElementById("iva");
 let condicion = 0;
@@ -23,6 +23,8 @@ let premioSinIva = 0;
 let premioConIva = 0;
 let imp = 0;
 let premioFinal = 0;
+let descuento = 0;
+let recargo = 0;
 
 function calculo() {
   let categoriaValue = categoria.value;
@@ -96,14 +98,17 @@ function calculo() {
   if (cantidadPersonas.value > 29 && cantidadPersonas.value < 49) {
     prima243 = prima243 - (prima243 * 5) / 100;
     prima365 = prima365 - (prima365 * 5) / 100;
+    descuento = 5;
     //alert("descuento por cantidad de personas: 5%");
   } else if (cantidadPersonas.value > 49 && cantidadPersonas.value < 100) {
     prima243 = prima243 - (prima243 * 10) / 100;
     prima365 = prima365 - (prima365 * 10) / 100;
+    descuento = 10;
     //alert("descuento por cantidad de personas: 10%");
   } else if (cantidadPersonas.value > 100) {
     prima243 = prima243 - (prima243 * 20) / 100;
     prima365 = prima365 - (prima365 * 20) / 100;
+    descuento = 20;
     //alert("descuento por cantidad de personas: 20%");
   } else {
     //alert("no hay descuento por cantidad de personas");
@@ -125,7 +130,7 @@ function calculo() {
     //   alert(primaAsistotal + primarec); //alerta de prima total CON asistencia medica en PERIODO CORTO
     // primaTotal = primaAsistotal + primarec;
     primaTotal = primaAsistotal + primarec;
-    alert(primaTotal);
+    //alert(primaTotal);
   } //else {
   //alert(primarec); //alerta de prima total SIN asistencia medica
   // }
@@ -138,7 +143,7 @@ function calculo() {
     //if (sumaAseguradaAsistencia.value > 0) {
     //alert(prima365 + primaAsist); //prima Anual + asistencia medica
     primaTotal = prima365 + primaAsist;
-    alert(primaTotal);
+    //alert(primaTotal);
     //}
   }
 
@@ -169,5 +174,21 @@ function calculo() {
   premioConIva = (condicion * premioSinIva) / 100;
   imp = (1.1 * premioSinIva) / 100;
   premioFinal = premioSinIva + premioConIva + imp;
-  alert("el premio es: " + premioFinal);
+  alert(
+    "Descuento por cantidad de personas: " +
+      descuento +
+      "%" +
+      "\rDerechos de emisión: $" +
+      derechoEmision +
+      "\rI.V.A.: " +
+      condicion +
+      "%" +
+      "\rRecargo: " +
+      recargo +
+      "%" +
+      "\rPrima: $" +
+      primaTotal +
+      "\rPremio: $" +
+      premioFinal
+  );
 }
