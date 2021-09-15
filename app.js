@@ -98,17 +98,17 @@ function calculo() {
     prima243 = prima243 - (prima243 * 5) / 100;
     prima365 = prima365 - (prima365 * 5) / 100;
     descuento = 5;
-    //alert("descuento por cantidad de personas: 5%");
+    alert("descuento por cantidad de personas: 5%");
   } else if (cantidadPersonas.value > 49 && cantidadPersonas.value < 100) {
     prima243 = prima243 - (prima243 * 10) / 100;
     prima365 = prima365 - (prima365 * 10) / 100;
     descuento = 10;
-    //alert("descuento por cantidad de personas: 10%");
+    alert("descuento por cantidad de personas: 10%");
   } else if (cantidadPersonas.value > 100) {
     prima243 = prima243 - (prima243 * 20) / 100;
     prima365 = prima365 - (prima365 * 20) / 100;
     descuento = 20;
-    //alert("descuento por cantidad de personas: 20%");
+    alert("descuento por cantidad de personas: 20%");
   } else {
     //alert("no hay descuento por cantidad de personas");
   }
