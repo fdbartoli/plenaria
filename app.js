@@ -24,7 +24,6 @@ let premioConIva = 0;
 let imp = 0;
 let premioFinal = 0;
 let descuento = 0;
-let recargo = 0;
 
 function calculo() {
   let categoriaValue = categoria.value;
@@ -175,20 +174,6 @@ function calculo() {
   imp = (1.1 * premioSinIva) / 100;
   premioFinal = premioSinIva + premioConIva + imp;
   alert(
-    "Descuento por cantidad de personas: " +
-      descuento +
-      "%" +
-      "\rDerechos de emisión: $" +
-      derechoEmision +
-      "\rI.V.A.: " +
-      condicion +
-      "%" +
-      "\rRecargo: " +
-      recargo +
-      "%" +
-      "\rPrima: $" +
-      primaTotal +
-      "\rPremio: $" +
-      premioFinal
+    "Prima: $" + primaTotal.toFixed(2) + " | Premio: $" + premioFinal.toFixed(2)
   );
 }
